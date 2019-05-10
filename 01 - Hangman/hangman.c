@@ -22,48 +22,48 @@ void PrintHangmanTree(int errors)
         	break;
 	    }
 	    case 1:
-        {
-        	printf("|\t\t O\n");
-        	printf("|\n|\n|\n|\n|\n\n");
-        	break;
-        }
-        case 2:
-        {
-        	printf("|\t\t O\n");
-        	printf("|\t\t/\n");
-        	printf("|\n|\n|\n|\n");
-        	break;
-        }
-        case 3:
-        {
-        	printf("|\t\t O\n");
-        	printf("|\t\t/X\n");
-        	printf("|\n|\n|\n|\n");
-        	break;
-        }
-        case 4:
-        {
-        	printf("|\t\t O\n");
-        	printf("|\t\t/X\\\n");
-        	printf("|\n|\n|\n|\n");
-        	break;
-        }
-        case 5:
-        {
-        	printf("|\t\t O\n");
-        	printf("|\t\t/X\\\n");
-        	printf("|\t\t/\n");
-        	printf("|\n|\n|\n");
-        	break;
-        }
-        case 6:
-        {
-        	printf("|\t\t O\n");
-        	printf("|\t\t/X\\\n");
-        	printf("|\t\t/ \\\n");
-        	printf("|\n|\n|\n");
-        	break;
-        }
+		{
+			printf("|\t\t O\n");
+			printf("|\n|\n|\n|\n|\n\n");
+			break;
+		}
+		case 2:
+		{
+			printf("|\t\t O\n");
+			printf("|\t\t/\n");
+			printf("|\n|\n|\n|\n");
+			break;
+		}
+		case 3:
+		{
+			printf("|\t\t O\n");
+			printf("|\t\t/X\n");
+			printf("|\n|\n|\n|\n");
+			break;
+		}
+		case 4:
+		{
+			printf("|\t\t O\n");
+			printf("|\t\t/X\\\n");
+			printf("|\n|\n|\n|\n");
+			break;
+		}
+		case 5:
+		{
+			printf("|\t\t O\n");
+			printf("|\t\t/X\\\n");
+			printf("|\t\t/\n");
+			printf("|\n|\n|\n");
+			break;
+		}
+		case 6:
+		{
+			printf("|\t\t O\n");
+			printf("|\t\t/X\\\n");
+			printf("|\t\t/ \\\n");
+			printf("|\n|\n|\n");
+			break;
+		}
 	}
 }
 
