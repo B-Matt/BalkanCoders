@@ -2,7 +2,7 @@
  *  Copyright Balkan Coders, 2020.
  *  Author: Matej Arlović
  *  Date: 25/09/2019.
- *	Web: themastergames.com
+ *  Web: themastergames.com
  */
 
 // Link Section
