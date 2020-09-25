@@ -1,13 +1,104 @@
 /*
- *  Copyright Balkan Coders, 2019.
+ *  Copyright Balkan Coders, 2020.
  *  Author: Matej Arlović
- *  Date: 09/05/2019.
+ *  Date: 25/09/2019.
+ *	Web: themastergames.com
  */
 
+// Link Section
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
+// Global Declaration Section
+void PrintHangmanTree(int errors);
+
+int SearchGameWord(char inputChar, char gameWord[]);
+
+// Main Function Section
+int main()
+{
+    char inputWord[8];
+    char helpWord[8];
+    char fullWord[8];
+    
+    char inputLetter;
+    
+    int playerHits = 0;
+    int playerErrors = 0;
+    
+    int isGameOver = 0;
+    int isGameWon = 0;
+    
+    // Game word input
+	do 
+	{
+	    printf("Input game word (max. 8 chars): ");
+	    scanf("%s", inputWord);
+	} 
+	while(strlen(inputWord) < 2 || strlen(inputWord) > 7);
+	
+	// Rendering help word
+	for(int i = 0; i < 8; i++)
+    {
+        if(inputWord[i] != '\0')
+        {
+            helpWord[i] = '#';
+            fullWord[i] = inputWord[i];
+        }
+    }
+	
+	// Game loop
+	do
+	{
+	    system("cls");                                                        // system("clear") if you use Linux!
+	    PrintHangmanTree(playerErrors);
+	    printf("HELP: %s\n", helpWord);
+	    
+	    printf("Input character: ");
+	    inputLetter = getchar();	    
+	    if(inputLetter == 10)
+	    {
+	    	continue;
+		}
+		
+	    int letterIndex = SearchGameWord(inputLetter, inputWord, strlen(inputWord));		    
+	    if(letterIndex != -1)
+	    {
+		   	helpWord[letterIndex] = inputWord[letterIndex];
+	    	inputWord[letterIndex] = '#';
+	    	playerHits++;
+			
+	    	if(playerHits >= strlen(fullWord))
+	    	{
+	    		isGameWon = 1;
+				isGameOver = 1;
+			}
+		}
+		else
+		{
+			playerErrors++;
+			
+		    if(playerErrors >= 6)
+		    {
+		        isGameOver = 1;
+		    }
+		}
+	}
+	while(isGameOver == 0);
+	
+	// After game ends
+	system("cls");
+	if(isGameWon == 1)
+	{
+		printf("You won!\n");
+	}	
+	PrintHangmanTree(playerErrors);
+	printf("WHOLE WORD: %s\n", fullWord);
+	return 0;
+}
+
+// Subprogram Section
 void PrintHangmanTree(int errors)
 {
 	printf("__________________\n");
@@ -67,9 +158,9 @@ void PrintHangmanTree(int errors)
 	}
 }
 
-int SearchGameWord(char inputChar, char gameWord[])
+int SearchGameWord(char inputChar, char gameWord[], int wordSize)
 {
-	for(int i = 0; i < 8; i++)
+	for(int i = 0; i < wordSize; i++)
 	{
 		if(gameWord[i] == inputChar)
 		{
@@ -77,86 +168,4 @@ int SearchGameWord(char inputChar, char gameWord[])
 		}
 	}
 	return -1;
-}
-
-
-
-int main()
-{
-    char inputWord[8];
-    char helpWord[8];
-    char fullWord[8];
-    
-    char inputLetter;
-    
-    int playerHits = 0;
-    int playerErrors = 0;
-    
-    bool isGameOver = false;
-    bool isGameWon = false;
-    
-    // PRVI SEGMENT - Unos rijeci za igru
-	do 
-	{
-	    printf("Unesite rijec za igru (max. 8 znakova): ");
-	    scanf("%s", inputWord);
-	} 
-	while(strlen(inputWord) < 2 || strlen(inputWord) > 7);
-	
-	// DRUGI SEGMENT - Postavljanje pomocne rijeci
-	for(int i = 0; i < 8; i++)
-    {
-        if(inputWord[i] != '\0')
-        {
-            helpWord[i] = '#';
-            fullWord[i] = inputWord[i];
-        }
-    }
-	
-	// TRECI SEGMENT - Igracka petlja
-	do
-	{
-	    system("cls");                                                        // system("clear") ukoliko koristite Linux!
-	    PrintHangmanTree(playerErrors);
-	    printf("POMOC: %s\n", helpWord);
-	    
-	    printf("Unesite slovo: ");
-	    inputLetter = getchar();	    
-	    if(inputLetter == 10)
-	    {
-	    	continue;
-		}
-		
-	    int letterIndex = SearchGameWord(inputLetter, inputWord);		    
-	    if(letterIndex != -1)
-	    {
-		   	helpWord[letterIndex] = inputWord[letterIndex];
-	    	inputWord[letterIndex] = '#';
-	    	playerHits++;
-	    	if(playerHits >= strlen(fullWord))
-	    	{
-	    		isGameWon = true;
-				isGameOver = true;
-			}
-		}
-		else
-		{
-			playerErrors++;
-		    if(playerErrors >= 6)
-		    {
-		        isGameOver = true;
-		    }
-		}
-	}
-	while(!isGameOver);
-	
-	// CETVRTI SEGMENT - Prikaz gotovog stabla
-	system("cls");
-	if(isGameWon)
-	{
-		printf("POBJEDILI STE!\n");
-	}	
-	PrintHangmanTree(playerErrors);
-	printf("CIJELA RIJEC: %s\n", fullWord);
-	return 0;
 }
